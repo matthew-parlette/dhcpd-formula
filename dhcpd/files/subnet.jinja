@@ -69,6 +69,25 @@
     {%- if not loop.last %},{% else %};{% endif %}
   {%- endfor %}
 {%- endif %}
+
+{%- if config.has_key('zones') %}
+  {%- for zone, values in config['zones'].items() %}
+{{ intendation }}  zone {{ zone }} {
+  {%- if values.has_key('comment') %}
+    {%- for line in values['comment'].splitlines() %}
+{{ intendation }}    # {{ line }}
+    {%- endfor %}
+  {%- endif %}
+  {%- if values.has_key('primary') %}
+{{ intendation}}    primary {{ values['primary'] }};
+  {%- endif %}
+  {%- if values.has_key('key') %}
+{{ intendation }}    key {{ dquote }}{{ values['key'] }}{{ dquote }};
+  {%- endif %}
+{{ intendation }}  }
+  {%- endfor %}
+{%- endif %}
+
 {%- for option in customized.keys() %}
   {%- if option in config %}
     {%- if customized[option]['type'] in types_to_quote %} {% set quote = dquote %} {%- endif %}

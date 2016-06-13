@@ -8,6 +8,8 @@ dhcpd.conf:
     - name: {{ dhcpd.config }}
     - source: salt://dhcpd/files/dhcpd.conf
     - template: jinja
+    - context:
+        dhcpd: {{ dhcpd }}
     - user: root
 {% if 'BSD' in salt['grains.get']('os') %}
     - group: wheel

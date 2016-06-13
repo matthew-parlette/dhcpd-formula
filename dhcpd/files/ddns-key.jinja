@@ -1,0 +1,8 @@
+key "{{ name }}" {
+{%- if 'algorithm' in values %}
+  algorithm {{ values['algorithm'] }};
+{%- endif %}
+{%- if 'secret' in values %}
+  secret "{{ values['secret'] }}";
+{%- endif %}
+};
