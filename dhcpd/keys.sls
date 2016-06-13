@@ -1,8 +1,5 @@
 {% from "dhcpd/map.jinja" import dhcpd with context %}
 
-include:
-  - dhcpd
-
 {%- for key_name, values in salt['pillar.get']('dhcpd:keys', {}).items() %}
 dhcpd.conf:
   file.managed:
@@ -20,6 +17,4 @@ dhcpd.conf:
     - group: root
 {%- endif %}
     - mode: 600
-    - watch_in:
-      - service: dhcpd
 {%- endfor %}
